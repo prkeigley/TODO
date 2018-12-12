@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Default access control on x_91447_todo_service_status</description>
+        <name>x_91447_todo_service_status</name>
+        <operation display_value="write">write</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-12-11 19:41:58</sys_created_on>
+        <sys_id>2eaab77ddb9223005080e1bb4b961947</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_91447_todo_service_status</sys_name>
+        <sys_package display_value="TODO" source="x_91447_todo">246cb2b1db1223005080e1bb4b9619b7</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TODO">246cb2b1db1223005080e1bb4b9619b7</sys_scope>
+        <sys_update_name>sys_security_acl_2eaab77ddb9223005080e1bb4b961947</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-12-11 19:41:58</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+</record_update>

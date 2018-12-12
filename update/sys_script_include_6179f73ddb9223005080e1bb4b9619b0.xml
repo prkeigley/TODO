@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_91447_todo.getServiceStatus</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>getServiceStatus</name>
+        <script><![CDATA[
+var getServiceStatus = Class.create();
+getServiceStatus.prototype = global.Object.extendsObject(AbstractAjaxProcessor, {
+ 
+//Function that angular calls to get all records that shall be shown on active tab
+ getActive: function() {
+
+//Variable that will contain all the objects that we find  
+  var recact = [];
+  
+//Create query to fetch the records where valid date hasnt passed or valid date is empty  
+  var queryString = "u_valid_to>=javascript:gs.daysAgoStart(0)^ORu_valid_toISEMPTY";
+  
+  var gr = new GlideRecord('u_service_status');
+  gr.addEncodedQuery(queryString);
+  gr.query();
+
+  //Go through all records and take those fields that I want and put them in a variable that I push into recact variable.
+  while(gr.next()) {
+   var svar = {};
+   svar.number = gr.number.toString();
+   svar.short_description = gr.short_description.toString();
+   svar.u_type = gr.u_type.toString();
+   svar.description = gr.description.toString();
+   svar.sys_updated_on = gr.sys_updated_on.toString();
+   svar.sys_created_on = gr.sys_created_on.toString();
+   svar.order = gr.order.toString();
+   recact.push(svar);
+   
+  }
+//After we are done with all the records we throw in JSON and send it back.
+  return new global.JSON().encodeArray(recact);
+ },
+
+//Function that angular calls to get all records that shall be shown on history tab
+ getHistory: function() {
+
+//Variable that will contain all the objects that we find  
+  var rechist = [];
+
+//Create query to fetch the records where valid date has passed    
+  var queryString = "u_valid_to<javascript:gs.daysAgoStart(0)";
+  
+  var gr = new GlideRecord('u_service_status');
+  gr.addEncodedQuery(queryString);
+  gr.query();
+
+//Go through all records and take those fields that I want and put them in a variable that I push into rechist variable.  
+  while(gr.next()) {
+   var svar = {};
+   svar.number = gr.number.toString();
+   svar.short_description = gr.short_description.toString();
+   svar.u_type = gr.u_type.toString();
+   svar.description = gr.description.toString();
+   svar.sys_updated_on = gr.sys_updated_on.toString();
+   svar.sys_created_on = gr.sys_created_on.toString();
+   svar.order = gr.order.toString();
+   rechist.push(svar);
+   
+  }
+//After we are done with all the records we throw in JSON and send it back.  
+  return new global.JSON().encodeArray(rechist);
+ },
+//This we need to have otherwise this script include don't work on public UI Pages.  
+ isPublic: function() {
+  return true;
+ }
+});
+
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-12-11 19:38:40</sys_created_on>
+        <sys_id>6179f73ddb9223005080e1bb4b9619b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>getServiceStatus</sys_name>
+        <sys_package display_value="TODO" source="x_91447_todo">246cb2b1db1223005080e1bb4b9619b7</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="TODO">246cb2b1db1223005080e1bb4b9619b7</sys_scope>
+        <sys_update_name>sys_script_include_6179f73ddb9223005080e1bb4b9619b0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-12-11 19:38:40</sys_updated_on>
+    </sys_script_include>
+</record_update>

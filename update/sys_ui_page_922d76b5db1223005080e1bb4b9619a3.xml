@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var app=angular.module('todo', []);
+app.controller('ToDoController', [ $scope, $http, function($scope, $http) { $scope.url = '/api/now/table/x_clds_todo_app_todo'; $http.defaults.headers.common.Accept = "application/json"; }]);
+	
+	$scope.loadData = function () {
+		$http({
+			method: 'GET',
+			url: $scope.url + '?sysparm_query=complete=false'
+		}).
+		success(function(data, status) {
+			$scope.tasks = data.records;
+		}).
+		error(function(data, status) {
+			$scope.tasks = [{'name':'Error loading ToDos'}];
+			});
+		};
+		$scope.loadData();
+		
+		$scope.addTask = function(todo) {
+			$http({
+				method: 'POST',
+				url: $scope.url,
+				headers: {'Content-Type': 'application/json'},
+					data: todo 
+			}).
+					success(function(data, status, headers, config) {
+					});
+				};
+				]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_91447_todo_todo.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	
+	<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" />
+
+
+	
+<div ng-app="todo">
+	<div class="col-md-6" ng-controller="ToDoController">
+		<h1>Todo List</h1>
+		<ul class="list-group"> <li> <form> <input class="form-control input-lg" ng-model="filterText" type="text" placeholder="Filter ToDos" /> </form> </li> </ul>
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="task in tasks | filter:filterText"></li>
+			<!--	  <li ng-repeat="x in todos">
+			{{x.description}}
+		</li> -->
+	</ul>
+		<div class="col-md-6 col-xs-12"> <h4>{{task.name}}</h4> </div>
+		
+		<form> <div class="input-group"> <input class="form-control input-lg" type="text" placeholder="Add ToDo" /> </div> </form>
+		<span class="input-group-btn"> <input class="btn btn-default btn-lg" type="submit">Add</input> </span>
+<!-- 	<div>
+		<label>Add new todo:
+			<input class="form-control" ng-model="newTodo"/>
+			<br></br>
+			<button ng-click="add(newTodo)" type="button" class="btn btn-warning">Add Todo</button>
+		</label>
+
+
+	</div> -->
+</div>
+</div>
+</j:jelly>]]></html>
+        <name>todo</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-12-11 15:15:29</sys_created_on>
+        <sys_id>922d76b5db1223005080e1bb4b9619a3</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>todo</sys_name>
+        <sys_package display_value="TODO" source="x_91447_todo">246cb2b1db1223005080e1bb4b9619b7</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TODO">246cb2b1db1223005080e1bb4b9619b7</sys_scope>
+        <sys_update_name>sys_ui_page_922d76b5db1223005080e1bb4b9619a3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-12-11 15:53:50</sys_updated_on>
+    </sys_ui_page>
+</record_update>

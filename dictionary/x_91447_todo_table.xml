@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="TODO Table" max_length="40" name="x_91447_todo_table" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="TODO" max_length="1000" name="todo" type="string"/>
+    </element>
+</database>

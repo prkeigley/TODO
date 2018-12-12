@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+} 
+
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_91447_todo_service status page.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	
+	<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" />
+	<script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.js" /> 
+	<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" />
+	<script>jQuery.noConflict();</script>
+
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" />
+<-->
+
+	
+ <div class="container">
+  
+  <h2>Service Status</h2>
+  <p>Here you can choose between active information and look at the history. Click on the subject on each serviceinformation to read more about it.</p>                  
+<!-- Code for the two tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+   <li class="active"><a href="#activeinfo"><span class="glyphicon glyphicon-alert"></span>$[SP]$[SP]Active</a></li>
+   <li><a href="#history"><span class="glyphicon glyphicon-folder-open"></span>$[SP]$[SP]History</a></li> 
+  </ul>
+ </div> 
+
+<!-- Build up the display of records with angular and tabs -->
+ 
+<div id="Serviceinfo" ng-app="servStat">
+ <div class="tab-content">
+<!-- First comes the Active Tab -->  
+  <div id="activeinfo" class="tab-pane fade in active">
+<!-- Point to the controller and the data-ng-init is needed to load data in when page loads-->   
+   <div ng-controller="MainController" data-ng-init="getAllActive()">
+<!-- Using Bootstrap Panel and Collapse to create the panels -->
+    <div class="panel-group" id="accordion">
+     <div class="panel panel-{{num.u_type}}" ng-repeat="num in numbers | orderBy: '-order'">
+      <div class="panel-heading" style="color:black">
+       <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#{{num.number}}">
+        <u>{{num.short_description}}</u></a>
+       </h4>
+       <p><b>Updated:</b> {{" " + num.sys_updated_on}}</p>
+       <p><b>Created:</b> {{" " + num.sys_created_on}}</p>
+        
+      </div>
+      <div id="{{num.number}}" class="panel-collapse collapse">
+       <div class="panel-body" style='padding:10px;'><pre>{{num.description}}</pre></div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+<!-- Here starts the code for the history tab -->
+  
+  <div id="history" class="tab-pane fade">
+   <div ng-controller="MainController" data-ng-init="getAllHistory()">
+    <div class="panel-group" id="accordion2" ng-repeat="num in numbers | orderBy: '-sys_updated_on'">
+     <div class="panel panel-{{num.u_type}}">
+      <div class="panel-heading" style="color:black">
+       <h4 id="{{num.u_type}}" class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion2" href="#{{num.number}}">
+        <u>{{num.short_description}} </u></a>
+       </h4>
+       <p><b>Uppdaterat:</b> {{" " + num.sys_updated_on}}</p>
+       <p><b>Skapat:</b> {{" " + num.sys_created_on}}</p>
+      </div>
+      <div id="{{num.number}}" class="panel-collapse collapse">
+       <div class="panel-body" style='padding:10px;'><pre>{{num.description}}</pre>                              </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+</j:jelly>
+]]></html>
+        <name>service status page</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-12-11 19:31:52</sys_created_on>
+        <sys_id>765873f9db9223005080e1bb4b961915</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>service status page</sys_name>
+        <sys_package display_value="TODO" source="x_91447_todo">246cb2b1db1223005080e1bb4b9619b7</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TODO">246cb2b1db1223005080e1bb4b9619b7</sys_scope>
+        <sys_update_name>sys_ui_page_765873f9db9223005080e1bb4b961915</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-12-11 20:08:30</sys_updated_on>
+    </sys_ui_page>
+</record_update>
